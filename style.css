@@ -1,0 +1,81 @@
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		:root{
+			font-size: 16px;
+			--theme-background-color:linear-gradient(rgba(225,225,225,0.6),rgba(225,225,225,0.8));
+		}
+		body{
+			background: url("https://static.zerochan.net/Shenhe.full.3533955.jpg");
+			background-size: cover;
+			background-position: top;
+		}
+		main{
+			height: 100vh;
+			width: 100vw;
+			background: rgba(0, 0, 225,0.8);
+			background-blend-mode: normal;
+			display: flex;
+			justify-content: space-around;
+			flex-direction: column;
+			align-items: center;
+			overflow: auto;
+		}
+		h1{
+			color: white;
+			opacity: 0.8;
+			margin: 0;
+			font-family: 'Source Sans Pro', sans-serif;
+			
+		}
+		#outputDiv{
+			background: var(--theme-background-color);
+			padding: 5rem;
+			border-radius: 1rem;
+			min-width: 40vw;
+			max-width: 60vw;
+			display: flex;
+			flex-direction: column;
+			align-items:center;
+		}
+		#outputDiv .todoData {
+			font-family: 'Roboto', sans-serif;
+			font-size: 1rem;
+			background: linear-gradient(rgba(0,0,225,0.1),rgba(0,0,225,0.05));
+			min-width: inherit;
+			border-radius: inherit;
+			text-align: center;
+			padding: 0.4rem;
+			margin: 0.2rem;
+		}
+		#outputDiv .todoData .cancelLogo{
+			float: right;
+			cursor: pointer;
+		}
+		#inputDiv{
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			width: 60vw;
+		}
+		#inputDiv input,#inputDiv #btn{
+			border-radius: 1.5rem;
+			outline: none;
+			border: none;
+			min-height: 150%;
+			background: var(--theme-background-color);
+			font-family: 'Poppins', sans-serif;
+			font-size: 1rem;
+		}
+		#inputDiv input{
+			padding: 0.5rem;
+			width: 50%;
+		}
+		#inputDiv #btn{
+			padding: 0.4rem;
+			width: 25%;
+			cursor: pointer;
+			font-weight: bold;
+		}
