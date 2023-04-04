@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@500&family=Source+Sans+Pro:wght@600&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,-25" />
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		:root{
+			font-size: 16px;
+			--theme-background-color:linear-gradient(rgba(225,225,225,0.6),rgba(225,225,225,0.8));
+		}
+		body{
+			background: url("https://static.zerochan.net/Shenhe.full.3533955.jpg");
+			background-size: cover;
+			background-position: top;
+		}
+		main{
+			height: 100vh;
+			width: 100vw;
+			background: rgba(0, 0, 225,0.8);
+			background-blend-mode: normal;
+			display: flex;
+			justify-content: space-around;
+			flex-direction: column;
+			align-items: center;
+			overflow: auto;
+		}
+		h1{
+			color: white;
+			opacity: 0.8;
+			margin: 0;
+			font-family: 'Source Sans Pro', sans-serif;
+			
+		}
+		#outputDiv{
+			background: var(--theme-background-color);
+			padding: 5rem;
+			border-radius: 1rem;
+			min-width: 40vw;
+			max-width: 60vw;
+			display: flex;
+			flex-direction: column;
+			align-items:center;
+		}
+		#outputDiv .todoData {
+			font-family: 'Roboto', sans-serif;
+			font-size: 1rem;
+			background: linear-gradient(rgba(0,0,225,0.1),rgba(0,0,225,0.05));
+			min-width: inherit;
+			border-radius: inherit;
+			text-align: center;
+			padding: 0.4rem;
+			margin: 0.2rem;
+		}
+		#outputDiv .todoData .cancelLogo{
+			float: right;
+			cursor: pointer;
+		}
+		#inputDiv{
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			width: 60vw;
+		}
+		#inputDiv input,#inputDiv #btn{
+			border-radius: 1.5rem;
+			outline: none;
+			border: none;
+			min-height: 150%;
+			background: var(--theme-background-color);
+			font-family: 'Poppins', sans-serif;
+			font-size: 1rem;
+		}
+		#inputDiv input{
+			padding: 0.5rem;
+			width: 50%;
+		}
+		#inputDiv #btn{
+			padding: 0.4rem;
+			width: 25%;
+			cursor: pointer;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<h1>To do list:</h1>
+		<div id="outputDiv">
+		</div>
+
+	<div id="inputDiv">
+		<input type="text">
+		<button type="submit" id="btn">Submit</button>
+	</div>
+	</main>
+	<script>
+let outputDiv = document.getElementById("outputDiv");
+let btn = document.getElementById("btn");
+let todoInLocal = JSON.parse(localStorage.getItem("todos")) || [];
+let inputDiv = document.querySelector("#inputDiv")
+function todo(){
+    let inputField = inputDiv.querySelector("input");
+    let inputValue = inputField.value;
+    //will add todo li in the the DOM
+    if(inputValue != ""){
+    outputDiv.insertAdjacentHTML("beforeend",`<li class="todoData"><span>${inputValue}</span> <span class="material-symbols-outlined cancelLogo" onclick="remove.bind(this)()">cancel</span></li>`)
+    todoInLocal.push(inputValue);
+    inputField.value = "";
+    localStorage.setItem("todos", JSON.stringify(todoInLocal))
+}
+}
+
+btn.addEventListener("click", () => todo());
+window.addEventListener("keypress", e => {
+  if (e.key === "Enter") {
+    todo();
+  }
+});
+
+//will add todo from local storage to DOM
+if(todoInLocal.length >= 1){
+todoInLocal.forEach((todoItem) => {
+outputDiv.insertAdjacentHTML("beforeend",`<li class="todoData"><span>${todoItem}</span> <span class="material-symbols-outlined cancelLogo" onclick="remove.bind(this)()">cancel</span></li>`)
+})
+}
+
+function remove() {
+    outputDiv.removeChild(this.parentElement);
+    todoInLocal = todoInLocal.filter(todo => todo != this.parentElement.children[0].innerHTML)//the span tag inside which the tasks to do is written by user or from local storage
+    localStorage.setItem("todos", JSON.stringify(todoInLocal))
+}
+	</script>
+</body>
+</html>
